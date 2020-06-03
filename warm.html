@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+        <title>WeUI</title>
+        <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.3.0/weui.min.css" />
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            // 返回 web 主机的域名，如：http://127.0.0.1:8080/testdemo/test.html?id=1&name=test
+            var url = window.location.href;
+            // 返回当前页面的路径和文件名，如：/testdemo/test.html
+            var pathname = window.location.pathname;
+            // 返回 web 主机的端口，如：8080
+            var port = window.location.port;
+            // 返回所使用的 web 协议，如：http:
+            var protocol = window.location.protocol;
+            // 获取参数，如：?id=1&name=test
+            var search = window.location.search;
+            // 获取指定参数值
+            var msg = decodeURI(getUrlParam('msg'));
+            
+            $("#msg").append(msg);
+        });
+     
+     
+        function getUrlParam(name) {
+            // 取得url中?后面的字符
+            var query = window.location.search.substring(1);
+            // 把参数按&拆分成数组
+            var param_arr = query.split("&");
+            for (var i = 0; i < param_arr.length; i++) {
+                var pair = param_arr[i].split("=");
+                if (pair[0] == name) {
+                    return pair[1];
+                }
+            }
+            return "";
+        }
+    </script>
+    </head>
+    <body>
+        <div class="container" id="container">
+            <div class="page msg_warn js_show">
+                <div class="weui-msg">
+                    <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+                    <div class="weui-msg__text-area">
+                        <h2 class="weui-msg__title">打卡失败</h2>
+                        <p class="weui-msg__desc"  id="msg"><a href="javascript:"></a></p>
+                    </div>
+                    <div class="weui-msg__tips-area">
+                      <p class="weui-msg__tips"><a href="javascript:"></a></p>
+                    </div>
+                    <div class="weui-msg__opr-area">
+                        <p class="weui-btn-area">
+                            <a href="javascript:history.back();" class="weui-btn weui-btn_default">点击返回</a>
+                        </p>
+                    </div>
+                    <div class="weui-msg__extra-area">
+                        <div class="weui-footer">
+                            <p class="weui-footer__links">
+                                <a href="javascript:" class="weui-footer__link"></a>
+                            </p>
+                            <p class="weui-footer__text">Copyright © 2008-2016 weui.io</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
