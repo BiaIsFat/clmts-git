@@ -39,13 +39,13 @@ clmts微信打卡
 创建参数二维码
 
 #### database.php
-数据库连接类
-protected connect 连接数据库
-public todayRecord 判断今天是否有出入记录
-public addRecord 保存打卡记录
-public searchLatest 搜索最新出入记录
-public searchVolunteer 搜索志愿者信息
-public addVolunteer 保存志愿者信息
+数据库连接类  
+protected connect 连接数据库  
+public todayRecord 判断今天是否有出入记录  
+public addRecord 保存打卡记录  
+public searchLatest 搜索最新出入记录  
+public searchVolunteer 搜索志愿者信息  
+public addVolunteer 保存志愿者信息  
 
 #### index.php
 微信公众平台服务器url
@@ -58,7 +58,7 @@ public addVolunteer 保存志愿者信息
 
 #### message.php
 构造微信消息
-clock_diagram_text() 进出打卡链接图文消息
+clock_diagram_text() 进出打卡链接图文消息  
 volunteer_diagram_text() 志愿者注册图文信息
 
 #### oauth.php
