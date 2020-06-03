@@ -1,14 +1,19 @@
 <?php
 require_once("menu_class.php");
 $menu = new menu_class();
+
 $button[] = array('name' => "点击扫码",
                   'type' => "scancode_push",
                   'key'  => "rselfmenu_0_1"
                   );
-
+$button[] = array('name' => "志愿者",
+                  'type' => "click",
+                  'key'  => "register"
+				  );
+$menu->delete_menu();
 $result = $menu->create_menu($button);
 var_dump($result);
-
+print_r($button);
 function bytes_to_emoji($cp)
 {
 	if ($cp > 0x10000){       # 4 bytes

@@ -2,7 +2,7 @@
 include_once("database.php");
 $db = new Mysql();
 switch ($_GET['state']) {
-    // oauth.php -> this
+    // oauth.php?state=0 -> this
     // User click the link in the Client.
     // Use openid to search the latest data to display.
     case '0':
@@ -76,7 +76,46 @@ switch ($_GET['state']) {
             echo "<script>window.location.href='$url'</script>";
         }
         break;
+    
+    // oauth.php?state=2 -> this
+    // Search volunteer information
+    case '2':
+        $openid = $_GET['openid'];
+        $info = $db->searchVolunteer($openid);
+        // Construct url
+        $url = "./register.html?openid=".$openid."&name=".$info['name']."&id=".$info['id']
+                ."&gender=".$info['gender']."&birth=".$info['birth']."&phone=".$info['phone']."&address=".$info['address'];
+        go($url);
+    break;
 
+    // Save volunteer information
+    case '3':
+        $openid = $_POST["openid"];
+        $name = $_POST["name"];
+        $id = $_POST["id"];
+        $gender = $_POST["sign"];
+        $birth = $_POST["birth"];
+        $phone = $_POST["phone"];
+        $address = $_POST["address"];
+        console($openid." ".$name." ".$id." ".$gender." ".$birth." ".$phone." ".$address);
+        // Register already or not
+        $info = $db->searchVolunteer($openid);
+        if (!empty($info)) {
+            // Registered
+            $url = "./warm.html?msg="."您已注册，请勿重复注册。";
+            go($url);
+        }
+        // Not register
+        $flag = $db->addVolunteer($openid, $name, $id, $gender, $birth, $phone, $address);
+        if (!$flag) {
+            // Register faild
+            $url = "./warm.html?msg="."注册失败，请重新操作。";
+            go($url);
+        } else {
+            // Register success
+            $url = "success.html";
+            go($url);
+        }
     default:
         # code...
         break;

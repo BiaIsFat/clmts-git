@@ -80,7 +80,7 @@ class wechatCallbackapiTest
                 {
                     case "clmts":
                         include_once("message.php");
-                        $content = diagram_text();
+                        $content = clock_diagram_text();
                         break;
                     default:
                         $content = "unknow qrcode";
@@ -90,7 +90,7 @@ class wechatCallbackapiTest
             case "CLICK":
                 // 手动点击公众号的菜单
                 include_once("message.php");
-                $content = diagram_text();
+                $content = volunteer_diagram_text();
                 break;
             default:
                 $content = "receive a new event: ".$object->Event;

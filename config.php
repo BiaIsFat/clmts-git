@@ -18,4 +18,9 @@ define('DB'         , "clmts");
 function console($msg) {
     echo("<script>console.log(\"$msg\");</script>");
 }
+
+// direct to new page
+function go($url) {
+    echo "<script>window.location.href='$url'</script>";
+}
 ?>

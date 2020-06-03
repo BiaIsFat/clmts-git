@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>UserInfo</title>
+	<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+        .Content-Main{
+            max-width: 500px;
+            margin: auto;
+            border: none;
+            border-radius: 5px; 
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            color: #D3D3D3;
+            background: #555;
+        }
+        .Content-Main h1{
+            padding: 8px 0px 40px 10px;
+            display: block;
+            border-bottom: 1px solid #444;
+        }
+        .text1{
+            margin-left: 3px;
+        }
+        .Content-Main label{
+            margin: 0px 0px 5px;
+            display: block;
+        }
+        .fileInputContainer{
+            height: 99px;
+            width: 99px;
+            margin: 20px 20px 20px 20px ;
+            border: none;
+            background: url("img/Example.jpg");
+            overflow: hidden; 
+            position: relative; 
+        }
+        .fileInput{
+            height: 106px;
+            border: none;
+            font-size: 300px;
+            opacity: 0;  
+            filter:alpha(opacity=0);
+            cursor: pointer;
+            position: absolute;
+        }
+        .Content-Main label>span{
+            width: 20%;
+            float: left;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .inorout{
+            padding-right: 13px;
+            padding-bottom: 13px;
+            font-weight: bold;
+            line-height: 4px; 
+        }
+        .inorout input[type=checkbox]{
+            margin-top:6px;
+            vertical-align:middle; 
+        }
+        .Content-Main input[type="text"],.Content-Main input[type="data"],.Content-Main textarea{
+            height: 25px;
+            width: 70%;
+            line-height: 15px;
+            padding: 5px 0px 5px 5px; 
+            margin-bottom: 16px;
+            margin-right: 6px;
+            margin-top: 2px;
+            border: none;
+            border-radius:2px;
+            -webkit-border-radius:2px;
+            -moz-border-radius:2px;
+            outline: 0 none; 
+            background:  #DFDFDF;
+            color: #525252;
+        }
+        .Content-Main textarea{
+            height: 100px;
+            width: 70%;
+            padding: 5px 0px 0px 5px;
+        }
+        .Content-Main .button{
+            padding: 8px 24px 8px 24px;
+            margin-bottom: 8px;
+			margin-left: 40%;
+            border: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #FFE477;
+            box-shadow: 1px 1px 1px  #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px  #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px  #3D3D3D;
+            color: #585858;
+            background: #f6ff0a;
+        }
+        .Content-Main .button:hover{
+            color:  #333;
+            background-color:  #EBEBEB ;
+        }
+    </style>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+            // 返回 web 主机的域名，如：http://127.0.0.1:8080/testdemo/test.html?id=1&name=test
+            var url = window.location.href;
+            // 返回当前页面的路径和文件名，如：/testdemo/test.html
+            var pathname = window.location.pathname;
+            // 返回 web 主机的端口，如：8080
+            var port = window.location.port;
+            // 返回所使用的 web 协议，如：http:
+            var protocol = window.location.protocol;
+            // 获取参数，如：?id=1&name=test
+            var search = window.location.search;
+            // 获取指定参数值
+            var openid = getUrlParam('openid');
+            var name = decodeURI(getUrlParam('name'));
+            var id = getUrlParam('id');
+            var gender = getUrlParam('gender');
+            var birth = getUrlParam('birth');
+            var phone = getUrlParam('phone');
+            var address = decodeURI(getUrlParam('address'));
+
+            $("#openid").attr("value", openid);
+            $("#name").attr("value", name);
+            $("#id").attr("value", id);
+            $("[value='"+gender+"']").attr("selected","");
+            $("#birth").attr("value", birth);
+            $("#phone").attr("value", phone);
+            $("#address").attr("value", address);
+
+            if (!name == "") {
+                $("h1").append("——"+name);
+                $(".input-box").attr("disabled", "");
+            }
+        });
+     
+     
+        function getUrlParam(name) {
+            // 取得url中?后面的字符
+            var query = window.location.search.substring(1);
+            // 把参数按&拆分成数组
+            var param_arr = query.split("&");
+            for (var i = 0; i < param_arr.length; i++) {
+                var pair = param_arr[i].split("=");
+                if (pair[0] == name) {
+                    return pair[1];
+                }
+            }
+            return "";
+        }
+    </script>
+</head>
+<body>
+        <div class="Content-Main">
+            <form  action="./record.php?state=3" method="post" class="form-userInfo">
+                <h1>志愿者信息</h1>
+                <span class="text1">请确认以下信息正确，如有问题，请联系clmtsgroup@163.com</span>
+                <p>
+                    <!--
+                <div class="fileInputContainer">
+                    <input class="fileInput" id="" type="file" name="">
+                </div>
+-->
+                <label>
+                    <input type="hidden" id="openid" name="openid" value="">
+                </label>
+                <label>
+                    <span>姓名:</span>
+                    <input class="input-box" type="text" id="name" name="name" placeholder="请输入你的姓名" value="">
+                </label>
+                <label>
+                    <span>身份证号:</span>
+                    <input class="input-box" type="text" id="id" name="id" placeholder="请输入你的身份证号码" value="">
+                </label>
+                <label class="inorout">
+                    <span>性别:</span>
+                    <select class="input-box" name="sign" id="gender">
+                        <option value="0" class="in">女</option>
+                        <option value="1" class="out">男</option>
+                    </select>
+                </label>
+                <label>
+                    <span>出生日期:</span>
+                    <input class="input-box" type="date" id="birth" name="birth">
+                </label> 
+                <label>
+                    <span>电话:</span>
+                    <input class="input-box" type="text" id="phone" name="phone" placeholder="请输入11位的电话号码" value="">
+                </label>
+                
+				<label>
+                    <span>家庭地址:</span>
+                    <input class="input-box" type="text" id="address" name="address" placeholder="请输入您的住址" value="">
+                </label>
+				<!-- <label>
+                    <span>今日体温:</span>
+                    <input type="text" id="temperature" name="temperature" placeholder="请输入今日体温" value="">
+                </label> -->
+				<br/>
+                <label>
+                    <input type="submit" class="button input-box" value="提交">
+                </label>
+            </form>
+        </div>
+</body>
+</html>

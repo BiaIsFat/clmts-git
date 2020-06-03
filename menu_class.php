@@ -59,7 +59,7 @@ class menu_class
     public function delete_menu()
     {
         $url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=".$this->access_token;
-        $res = $this->http_request($url, $data);
+        $res = $this->http_request($url);
         return json_decode($res, true);
     }
 	

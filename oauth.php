@@ -11,8 +11,11 @@ $weixin->logger("openid_oauth2:     ".$access_token_oauth2['openid']);
 
 $userinfo = $weixin->oauth2_get_user_info($access_token_oauth2['access_token'], $access_token_oauth2['openid']); 
 
+
 // 跳转至搜索数据库
-$url = "./record.php?state=0&openid=".$access_token_oauth2['openid'];
+// 0-业主打卡; 2-志愿者注册
+$state = $_GET['s'];
+$url = "./record.php?state=".$state."&openid=".$access_token_oauth2['openid'];
 echo "<script>window.location.href='$url'</script>";
 ?>
 

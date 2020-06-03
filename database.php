@@ -84,7 +84,7 @@ class Mysql {
     }
 
     /**
-     * 判断今天是否有出入记录
+     * 搜索最新出入记录
      * @param   string $openid
      * @return  array
      */
@@ -94,6 +94,38 @@ class Mysql {
         $result = mysqli_query(self::$con, $sql);
         $row = mysqli_fetch_array($result);
         return $row;
+    }
+
+    /**
+     * 搜索志愿者信息
+     * 无记录返回空数组
+     * @param string $openid
+     * @return array
+     */
+    public function searchVolunteer($openid)
+    {
+        $sql = "select * from volunteer where openid = '$openid'";
+        $result = mysqli_query(self::$con, $sql);
+        $row = mysqli_fetch_array($result);
+        if(!$row) {
+            console("no such volunteer");
+            $row = [];
+        }
+        return $row;
+    }
+
+    /**
+     * 保存志愿者信息
+     */
+    public function addVolunteer($openid, $name, $id, $gender, $birth, $phone, $address)
+    {
+        $sql = "insert into volunteer values ('$openid', '$name', '$id', $gender, '$birth', '$phone', '$address')";
+        console($sql);
+        $result = mysqli_query(self::$con, $sql);
+        if (!$result) {
+            console(mysqli_error(self::$con));
+        }
+        return $result ? true : false;
     }
 }
 ?>
