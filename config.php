@@ -22,5 +22,6 @@ function console($msg) {
 // direct to new page
 function go($url) {
     echo "<script>window.location.href='$url'</script>";
+    exit;
 }
 ?>

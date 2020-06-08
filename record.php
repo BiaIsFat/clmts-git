@@ -59,6 +59,7 @@ switch ($_GET['state']) {
                 $msg = "您今天尚未外出，无法进入。";
                 $url = "./warm.html?msg=".$msg;
                 echo "<script>window.location.href='$url'</script>";
+                exit;
             }
             // 2. Did the user come in.
             $flag = $db->todayRecord($openid, $sign);
@@ -67,13 +68,15 @@ switch ($_GET['state']) {
                 // User has come in already.
                 $msg = "您今天已经进出一次，不允许再次进入。";
                 $url = "./warm.html?msg=".$msg;
-                echo "<script>window.location.href='$url'</script>";;
+                echo "<script>window.location.href='$url'</script>";
+                exit;
             }
             // 3. User is allowed to come in.
             $flag = $db->addRecord($openid, $name, $phone, $address, $temperature, $sign);
             // 4. Present result
             $url = "./success.html?sign=$sign";
             echo "<script>window.location.href='$url'</script>";
+            exit;
         }
         break;
     
